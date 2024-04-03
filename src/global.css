@@ -51,6 +51,7 @@
   .wrapper_card {
     @apply rounded-lg border bg-card-bg;
   }
+  
   .bg-box-parent {
     @apply fixed inset-0 z-[-1] bg-transparent h-screen w-screen;
     background-image: linear-gradient(
@@ -58,6 +59,7 @@
       hsl(var(--body-bg))
     );
   }
+
   .bg-box {
     @apply w-full h-full;
     background-size: 50px 50px;
