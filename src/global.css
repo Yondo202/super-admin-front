@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --card-bg: 0 0% 100%;
+    --body-bg: 214 23% 94%;
+    --hover-bg: 210 40% 96.1%;
+    --primary: 221.2 83.2% 53.3%;
+    --text: 222.2 84% 4.9%;
+    --border: 205.57 96.83% 87.65%;
+    --muted-bg: 210 40% 96.1%;
+    --muted-text: 215.4 16.3% 46.9%;
+    --muted-border: 214.3 31.8% 91.4%;
+
+    --ring: 221.2 83.2% 53.3%; /*box shadow toi border*/
+  }
+  .dark {
+    --card-bg: 222.2 84% 4.9%;
+    --body-bg: 240 10% 3.92%;
+    --hover-bg: 217.2 32.6% 17.5%;
+    --primary: 221.2 83.2% 53.3%;
+    --text: 210 40% 98%;
+    --border: 217.2 40.6% 24.5%;
+    --muted-bg: 217.2 32.6% 17.5%;
+    --muted-text: 215 20.2% 65.1%;
+    --muted-border: 217.2 32.6% 17.5%;
+
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --danger-color: 3.06 82.2% 62.55%;
+  }
+  html {
+    @apply font-sans;
+  }
+  * {
+    @apply border-muted-border;
+  }
+  body {
+    @apply bg-body-bg text-sm text-text; /* font-sans  */
+  }
+  .one_line {
+    @apply max-w-full truncate;
+  }
+  .wrapper_card {
+    @apply rounded-lg border bg-card-bg;
+  }
+  .bg-box-parent {
+    @apply fixed inset-0 z-[-1] bg-transparent h-screen w-screen;
+    background-image: linear-gradient(
+      hsl(var(--muted-bg)),
+      hsl(var(--body-bg))
+    );
+  }
+  .bg-box {
+    @apply w-full h-full;
+    background-size: 50px 50px;
+    background-image: linear-gradient(
+        0deg,
+        transparent 24%,
+        hsl(var(--muted-bg) / 55%) 25%,
+        hsl(var(--muted-bg) / 55%) 26%,
+        transparent 27%,
+        transparent 74%,
+        hsl(var(--muted-bg) / 55%) 75%,
+        hsl(var(--muted-bg) / 55%) 76%,
+        transparent 77%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        transparent 24%,
+        hsl(var(--muted-bg) / 55%) 25%,
+        hsl(var(--muted-bg) / 55%) 26%,
+        transparent 27%,
+        transparent 74%,
+        hsl(var(--muted-bg) / 55%) 75%,
+        hsl(var(--muted-bg) / 55%) 76%,
+        transparent 77%,
+        transparent
+      );
+  }
+}
