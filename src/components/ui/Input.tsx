@@ -82,7 +82,7 @@ const FloatingLabelInput = React.forwardRef<React.ElementRef<typeof FloatingInpu
             
             <FloatingInput ref={ref} id={id ?? ids} {...props} className={`${props.className} ${beforeAddon ? `pl-9` : ``}`} />
 
-            <div className="absolute left-2 top-1/2 w-4 -translate-y-1/2 text-muted-text peer-focus:text-primary">{beforeAddon}</div>
+            <div className="absolute left-2 top-1/2 w-4 -translate-y-1/2 text-muted-text peer-focus:text-primary text-lg">{beforeAddon}</div>
 
             {floatLabel && (
                <FloatingLabel htmlFor={id ?? ids} className={`${props.sizes === 'sm'?`text-xs`:``} ${beforeAddon ? `peer-placeholder-shown:pl-8` : ``}`}>

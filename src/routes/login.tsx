@@ -5,7 +5,8 @@ import { useAuthCore } from '@/core/AuthWrapper'
 import { useState } from 'react'
 import { TextInput } from '@/components/custom'
 // import BackgroundBeams from '@/utils/lib/BgBeams'
-import { UserRound, KeyRound } from 'lucide-react'
+import { AiOutlineUser } from "react-icons/ai";
+import { IoKeyOutline } from "react-icons/io5";
 
 export const Route = createFileRoute('/login')({
    beforeLoad: ({ context }) => {
@@ -49,7 +50,7 @@ function Login() {
                   <div className="h-full border-b border-primary pb-2.5">Нэвтрэх</div>
                </div>
                <TextInput
-                  beforeAddon={<UserRound strokeWidth={1.2} width="100%" />}
+                  beforeAddon={<AiOutlineUser />}
                   sizes="lg"
                   className="mb-6"
                   control={control}
@@ -58,7 +59,7 @@ function Login() {
                   rules={{ required: 'Нэвтрэх нэр' }}
                />
                <TextInput
-                  beforeAddon={<KeyRound strokeWidth={1.2} width="100%" />}
+                  beforeAddon={<IoKeyOutline />}
                   sizes="lg"
                   className="mb-6"
                   autoComplete="on"

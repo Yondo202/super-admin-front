@@ -1,6 +1,6 @@
 import { Empty, Loading } from '@/assets/svg'
 import * as React from 'react'
-import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { RxDotsHorizontal } from "react-icons/rx";
 import {
    ColumnDef,
    ColumnFiltersState,
@@ -13,16 +13,17 @@ import {
    getSortedRowModel,
    useReactTable,
 } from '@tanstack/react-table'
-
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
-
 import { Checkbox, Button, FloatingLabelInput } from '@/components/ui'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { MoveUp, MoveDown, MoveHorizontal, Pencil, Trash2, Search, Route } from 'lucide-react'
+import { GoTrash, GoPencil } from "react-icons/go";
+import { PiPath } from "react-icons/pi";
+import { BiSearchAlt } from "react-icons/bi";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+import { TfiArrowsVertical } from "react-icons/tfi";
+
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
@@ -73,17 +74,17 @@ export default function DataTable<T extends object>({ columns, data, isLoading }
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" className="h-8 w-8 p-0">
                               {/* <span className="sr-only">Open menu</span> */}
-                              <DotsHorizontalIcon className="h-4 w-4" />
+                              <RxDotsHorizontal className="h-4 w-4" />
                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                            <DropdownMenuLabel className="text-muted-text">Үйлдэл</DropdownMenuLabel>
                            <DropdownMenuSeparator />
                            <DropdownMenuItem className="gap-3">
-                              <Pencil size={17} strokeWidth={1} /> Засах
+                              <GoPencil  /> Засах
                            </DropdownMenuItem>
                            <DropdownMenuItem className="gap-3">
-                              <Trash2 size={17} strokeWidth={1} /> Устгах
+                              <GoTrash /> Устгах
                            </DropdownMenuItem>
                         </DropdownMenuContent>
                      </DropdownMenu>
@@ -129,7 +130,7 @@ export default function DataTable<T extends object>({ columns, data, isLoading }
                   // label="Нэрээр хайх..."
                   // value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
                   // onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
-                  beforeAddon={<Search strokeWidth={1.2} width="100%" />}
+                  beforeAddon={<BiSearchAlt />}
                   className="w-60 rounded-full"
                   sizes="sm"
                   value={globalFilter ?? ''}
@@ -141,7 +142,7 @@ export default function DataTable<T extends object>({ columns, data, isLoading }
                   <PopoverTrigger asChild>
                      <Button variant="outline" size="icon" className="ml-auto">
                         {/* Харагдац <ChevronDownIcon className="ml-2 h-4 w-4" /> */}
-                        <Route size={17} strokeWidth={1.4} className="stroke-primary" />
+                        <PiPath className="text-primary" />
                      </Button>
                   </PopoverTrigger>
 
@@ -206,10 +207,10 @@ export default function DataTable<T extends object>({ columns, data, isLoading }
                                     {/* {header.column.getCanSort() && !header.column.getIsSorted() && <TwoSideArrow />} */}
                                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                     <div className="absolute right-px top-2/4 -translate-y-2/4">
-                                       {header.column.getCanSort() && !header.column.getIsSorted() && <MoveHorizontal opacity={0.4} size={16} strokeWidth={1.2} className="rotate-90" />}
+                                       {header.column.getCanSort() && !header.column.getIsSorted() && <TfiArrowsVertical className="opacity-50" />}
                                        {{
-                                          asc: <MoveUp size={16} strokeWidth={1.2} />,
-                                          desc: <MoveDown size={16} strokeWidth={1.2} />,
+                                          asc: <BsArrowUp />,
+                                          desc: <BsArrowDown />,
                                        }[header.column.getIsSorted() as string] ?? null}
                                     </div>
                                  </div>
@@ -265,7 +266,7 @@ export default function DataTable<T extends object>({ columns, data, isLoading }
                   table.setPageSize(Number(e))
                }}
             >
-               <SelectTrigger className="w-[70px]">
+               <SelectTrigger className="w-[65px] text-xs p-2.5 py-1.5 h-8">
                   <SelectValue placeholder="5" />
                </SelectTrigger>
                <SelectContent>

@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { LayoutGrid } from 'lucide-react'
+import { BsLayoutThreeColumns } from "react-icons/bs";
 
 const LeftMenu = () => {
    return (
@@ -16,7 +16,7 @@ const LeftMenu = () => {
                }}
                // activeOptions={{ exact: true }}
             >
-               <LayoutGrid className="text-primary group-[.active]:relative group-[.active]:z-10 group-[.active]:text-[#FFF]" strokeWidth={1.8} size={18} />
+               <BsLayoutThreeColumns className="text-primary group-[.active]:relative group-[.active]:z-10 group-[.active]:text-[#FFF]" />
                <span className="z-10 group-[.active]:relative group-[.active]:font-medium group-[.active]:text-[#FFF]">Нүүр</span>
                <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" />
             </Link>
@@ -29,7 +29,7 @@ const LeftMenu = () => {
                }}
                // activeOptions={{ exact: true }}
             >
-               <LayoutGrid className="text-primary group-[.active]:relative group-[.active]:z-10 group-[.active]:text-[#FFF]" strokeWidth={1.8} size={18} />
+               <BsLayoutThreeColumns className="text-primary group-[.active]:relative group-[.active]:z-10 group-[.active]:text-[#FFF]" />
                <span className="z-10 group-[.active]:relative group-[.active]:font-medium group-[.active]:text-[#FFF]">Тухай</span>
                <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" />
             </Link>

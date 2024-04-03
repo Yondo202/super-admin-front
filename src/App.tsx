@@ -6,7 +6,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import InitialWrapper, { useAuthState } from './core/AuthWrapper'
 import { Toaster } from 'sonner'
 import { Loading } from '@/components/ui'
-import { Moon, Sun } from 'lucide-react'
+import { GoMoon, GoSun } from "react-icons/go";
 
 const router = createRouter({
    routeTree,
@@ -54,9 +54,9 @@ const SwitchDarkMode = () => {
    return (
       <div className="fixed bottom-8 right-8 cursor-pointer rounded-full border border-muted-border bg-card-bg p-2">
          {theme === 'dark' ? (
-            <Sun strokeWidth={1.4} className="w-5 h-5 text-muted-text" onClick={() => setTheme('light')} />
+            <GoSun className="w-5 h-5 text-muted-text" onClick={() => setTheme('light')} />
          ) : (
-            <Moon strokeWidth={1.4} className="w-5 h-5 text-muted-text" onClick={() => setTheme('dark')} />
+            <GoMoon className="w-5 h-5 text-muted-text" onClick={() => setTheme('dark')} />
          )}
       </div>
    )
