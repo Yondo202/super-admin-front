@@ -65,7 +65,7 @@ export const useAuthCore = () => {
    // jwt: JWT | undefined
    const fetchMe = async (jwt: JWT | undefined) => {
       try {
-         const userme = await axios.get(import.meta.env.VITE_AUTH_URL + '/user/me', { headers: { Authorization: `Bearer ${String(jwt)}` } })
+         const userme = await axios.get(import.meta.env.VITE_AUTH_URL + 'user/me', { headers: { Authorization: `Bearer ${jwt}` } })
          // if (userme.data?.data.type !== 'SUPER') {
          //    // await signOut()
          //    Notification('Нэвтрэх боломжгүй хэрэглэгч байна!', 'error')

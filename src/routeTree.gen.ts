@@ -15,6 +15,8 @@ import { Route as LoginImport } from './routes/login'
 import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as DashboardIndexImport } from './routes/_dashboard/index'
 import { Route as DashboardAboutImport } from './routes/_dashboard/about'
+import { Route as DashboardStoresIndexImport } from './routes/_dashboard/stores.index'
+import { Route as DashboardStoresStoreidImport } from './routes/_dashboard/stores.$storeid'
 
 // Create/Update Routes
 
@@ -38,6 +40,16 @@ const DashboardAboutRoute = DashboardAboutImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
+const DashboardStoresIndexRoute = DashboardStoresIndexImport.update({
+  path: '/stores/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardStoresStoreidRoute = DashboardStoresStoreidImport.update({
+  path: '/stores/$storeid',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,13 +70,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
+    '/_dashboard/stores/$storeid': {
+      preLoaderRoute: typeof DashboardStoresStoreidImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/stores/': {
+      preLoaderRoute: typeof DashboardStoresIndexImport
+      parentRoute: typeof DashboardImport
+    }
   }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  DashboardRoute.addChildren([DashboardAboutRoute, DashboardIndexRoute]),
+  DashboardRoute.addChildren([
+    DashboardAboutRoute,
+    DashboardIndexRoute,
+    DashboardStoresStoreidRoute,
+    DashboardStoresIndexRoute,
+  ]),
   LoginRoute,
 ])
 

@@ -1,10 +1,10 @@
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
+import { QueryClient } from "@tanstack/react-query";
 // import { type AuthContext } from '../core/auth'
 
-interface MyRouterContext {
-   isAuthenticated: boolean
-}
-
-export const Route = createRootRouteWithContext<MyRouterContext>()({
-   component: Outlet,
-})
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+  isAuthenticated: boolean;
+}>()({
+  component: Outlet,
+});

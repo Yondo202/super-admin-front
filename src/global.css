@@ -48,7 +48,7 @@
   .one_line {
     @apply max-w-full truncate;
   }
-  .wrapper_card {
+  .wrapper {
     @apply rounded-lg border bg-card-bg;
   }
   

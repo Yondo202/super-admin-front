@@ -8,10 +8,11 @@ type Request = {
    url?: string
    mainUrl?: string
    body?: object
+   webid?: string
 }
 
 type ResponseType<T> = {
-   data?: T[]
+   data?: T
 }
 
 export const getJwt = () => {
@@ -21,7 +22,7 @@ export const getJwt = () => {
       ?.split('=')[1]
 }
 
-export const request = async <T>({ mainUrl, url = '', method = 'get', body = {} }: Request) => {
+export const request = async <T>({ mainUrl, url = '', method = 'get', body = {}, webid }: Request) => {
    const { accessToken } = (await fetchAuthSession()).tokens ?? {}
    // const User = await Auth.currentAuthenticatedUser()
    // const jwt = User?.signInUserSession?.accessToken?.jwtToken
@@ -32,8 +33,8 @@ export const request = async <T>({ mainUrl, url = '', method = 'get', body = {} 
    //     return
    // }
 
-   const token = { headers: { Authorization: `Bearer ${accessToken}` } }
-   const fullUrl = `${mainUrl ?? import.meta.env.VITE_AUTH_UR}${url}`
+   const token = { headers: { Authorization: `Bearer ${accessToken}`, webid:webid } }
+   const fullUrl = `${mainUrl ?? import.meta.env.VITE_AUTH_URL}${url}`
 
    try {
       const response = await axios<ResponseType<T>>({ url: fullUrl, method: method, data: body ?? {}, headers: token.headers })

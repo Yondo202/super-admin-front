@@ -1,25 +1,33 @@
-// import { DisplayColumnDef, GroupColumnDef, AccessorColumnDef } from '@tanstack/react-table'
+// import { ColumnDef } from "@tanstack/react-table";
+
+import "@tanstack/react-table"; //or vue, svelte, solid, qwik, etc.
+
+// declare module '@tanstack/react-table' {
+//   interface ColumnMeta<TData extends RowData, TValue> {
+//     foo: string
+//   }
+// }
 
 // // export {};
 
-// declare global {
-//    //   type ColumnTypes<T> = ColumnDef<T>
-//    type TColumnDef<T> = {
-//       width?: number
-//    } & ColumnDef<T>
-//    type TActionTypes = 'add' | 'edit' | 'delete'
-//    type TActionState<T> = {
-//       type: TActionTypes
-//       open: boolean
-//       data: T
-//    }
+declare global {
+  //   type ColumnTypes<T> = ColumnDef<T>
+  // type ColumnDef<T> = {
+  //   asAction?: boolean;
+  // } & ColumnDef<T>;
+
+  type TRowAction<T> = {
+    type: "add" | "edit" | "delete";
+    data: T;
+  };
+}
 
 //    // type TActionsFunc<T> = (type:TActionTypes, data:T) => void
 // }
 
 // import '@tanstack/react-table'
 
-// type TColumnDef = {
+// type ColumnDef = {
 //    width?: number
 //    className?: string
 // }
