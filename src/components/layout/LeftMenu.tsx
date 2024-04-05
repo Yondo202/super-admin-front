@@ -35,31 +35,31 @@ const LeftMenu = () => {
                <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" />
             </Link>
          </div> */}
-         <div className="flex flex-col gap-2.5 pt-6">
+         <div className="flex flex-col gap-5 pt-6">
             <Link
-               className="group relative flex items-center gap-3 p-2.5 text-xs2"
+               className="group relative flex items-center gap-3 p-3 py-1 text-xs2 border-l-2"
                to="/stores"
                activeProps={{
-                  className: 'active',
+                  className: 'active border-primary',
                }}
                preload="intent"
             >
-               <CiCircleList className="text-xl text-muted-text group-[.active]:relative group-[.active]:z-10 group-[.active]:text-primary" />
-               <span className="z-10 group-[.active]:relative group-[.active]:text-primary">Вэбийн жагсаалт</span>
-               <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary/10 opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" />
+               <CiCircleList className="text-xl text-text group-[.active]:relative group-[.active]:z-10 group-[.active]:text-primary" />
+               <span className="z-10 group-[.active]:relative group-[.active]:font-medium group-[.active]:text-primary">Вэбийн жагсаалт</span>
+               {/* <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary/10 opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" /> */}
             </Link>
 
             <Link
-               className="group relative flex items-center gap-3 p-2.5 text-xs2"
+               className="group relative flex items-center gap-3 p-3 py-1 text-xs2  border-l-2"
                to="/about"
                activeProps={{
-                  className: 'active',
+                  className: 'active border-primary',
                }}
                // activeOptions={{ exact: true }}
             >
-               <PiUserSwitchLight className="text-xl text-muted-text group-[.active]:relative group-[.active]:z-10 group-[.active]:text-primary" />
-               <span className="z-10 group-[.active]:relative group-[.active]:text-primary">Хэрэглэгчид</span>
-               <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary/10 opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" />
+               <PiUserSwitchLight className="text-xl text-text group-[.active]:relative group-[.active]:z-10 group-[.active]:text-primary" />
+               <span className="z-10 group-[.active]:relative group-[.active]:font-medium group-[.active]:text-primary">Хэрэглэгчид</span>
+               {/* <div className="-z-1 ease absolute -left-[160px] top-0 h-full w-full rounded-r-full bg-primary/10 opacity-0 transition-all duration-300 group-[.active]:-left-10 group-[.active]:opacity-100" /> */}
             </Link>
          </div>
       </div>
