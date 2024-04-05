@@ -45,7 +45,7 @@ function Login() {
          <img className="w-24" src="/siro.svg" />
          <form onSubmit={handleSubmit(onSubmit)}>
             {/* <ModeToggle /> */}
-            <div className="w-96 rounded-md bg-card-bg p-6 pb-12 shadow-sm">
+            <div className="w-96 rounded-md bg-card-bg p-6 pb-12 shadow-sm border">
                <div className="mb-10 flex border-b text-base font-normal">
                   <div className="h-full border-b border-primary pb-2.5">Нэвтрэх</div>
                </div>

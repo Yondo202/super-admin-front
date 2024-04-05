@@ -49,6 +49,9 @@ module.exports = {
           to: { opacity:"1", scale:"1" },
         },
       },
+      fontSize:{
+        xs2:'13px',
+      },
       animation: {
         "scale": "scale 0.3s ease",
         "accordion-down": "accordion-down 0.2s ease-out",

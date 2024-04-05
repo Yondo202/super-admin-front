@@ -14,7 +14,8 @@ const queryClient = new QueryClient({
     queries: {
       retry: false,
       staleTime: 0,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect:true,
     },
   },
 });
@@ -62,6 +63,9 @@ function App() {
           {/* <BackgroundBeams /> */}
         </ThemeProvider>
       </InitialWrapper>
+
+     
+      
     </QueryClientProvider>
   );
 }
