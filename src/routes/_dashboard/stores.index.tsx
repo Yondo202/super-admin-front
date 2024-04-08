@@ -3,7 +3,7 @@ import { DataTable, Header } from '@/components/custom';
 import { ColumnDef } from '@tanstack/react-table';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { storeQueryOptions, TStore } from '@/utils/connection/queryOptions';
-
+import { TAction } from '@/utils/enums';
 export const Route = createFileRoute('/_dashboard/stores/')({
    loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(storeQueryOptions),
    beforeLoad: () => ({ breadcrumbs: [{ title: 'Вэбийн жагсаалт', toLink: '/stores' }] }),
@@ -14,8 +14,8 @@ function Dashboard() {
    const navigate = useNavigate({ from: '/stores' });
    const { data = [], isLoading } = useSuspenseQuery(storeQueryOptions);
 
-   const rowAction = ({ data }: TRowAction<TStore>) => {
-      navigate({ to: data.id, search: { title: data.name } });
+   const rowAction = ({ data }: TAction<TStore>) => {
+      navigate({ to: data?.id, search: { title: data?.name } });
    };
 
    return (

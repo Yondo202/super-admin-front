@@ -1,29 +1,30 @@
 // import { queryClient } from "@/main";
-import axios from 'axios'
-import Notification from '@/utils/hooks/Notification'
-import { fetchAuthSession } from 'aws-amplify/auth'
+import axios from 'axios';
+import Notification from '@/utils/hooks/Notification';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import { queryClient } from '@/App';
 
-type Request = {
-   method?: 'get' | 'post' | 'put' | 'post'
-   url?: string
-   mainUrl?: string
-   body?: object
-   webid?: string
-}
+type TRequest<T> = {
+   method?: 'get' | 'post' | 'put' | 'delete';
+   url?: string;
+   mainUrl?: string;
+   body?: T;
+   webid?: string;
+};
 
 type ResponseType<T> = {
-   data?: T
-}
+   data?: T;
+};
 
 export const getJwt = () => {
    return document.cookie
       ?.split('; ')
       ?.find((row) => row.startsWith('jwt='))
-      ?.split('=')[1]
-}
+      ?.split('=')[1];
+};
 
-export const request = async <T>({ mainUrl, url = '', method = 'get', body = {}, webid }: Request) => {
-   const { accessToken } = (await fetchAuthSession()).tokens ?? {}
+export const request = async <T>({ mainUrl, url = '', method = 'get', body = undefined, webid }: TRequest<T>) => {
+   const { accessToken } = (await fetchAuthSession()).tokens ?? {};
    // const User = await Auth.currentAuthenticatedUser()
    // const jwt = User?.signInUserSession?.accessToken?.jwtToken
    // if (!jwt) {
@@ -33,14 +34,29 @@ export const request = async <T>({ mainUrl, url = '', method = 'get', body = {},
    //     return
    // }
 
-   const token = { headers: { Authorization: `Bearer ${accessToken}`, webid:webid } }
-   const fullUrl = `${mainUrl ?? import.meta.env.VITE_AUTH_URL}${url}`
+   const token = { headers: { Authorization: `Bearer ${accessToken}`, webid: webid } };
+   const fullUrl = `${mainUrl ?? import.meta.env.VITE_AUTH_URL}${url}`;
 
    try {
-      const response = await axios<ResponseType<T>>({ url: fullUrl, method: method, data: body ?? {}, headers: token.headers })
-      return response.data.data
+      const response = await axios<ResponseType<T>>({ url: fullUrl, method: method, data: body ?? {}, headers: token.headers });
+      if (method !== 'get') {
+         Notification('Хүсэлт амжилттай', 'success');
+      }
+
+      return response.data.data;
    } catch (err) {
-      Notification('Хүсэлт амжилтгүй', 'error')
-      throw err
+      Notification('Хүсэлт амжилтгүй', 'error');
+      throw err;
    }
+};
+
+
+type TRefetch = {
+   queryKey:string
+   queryId?:string
 }
+
+export const UseReFetch = ({ queryKey, queryId }:TRefetch) => {
+   queryClient.refetchQueries({ queryKey: [queryKey, queryId ?? undefined] });
+   // messageAlert('Хүсэлт амжилттай')
+};

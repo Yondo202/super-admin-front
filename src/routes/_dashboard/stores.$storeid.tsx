@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Header, Skeleton, DataTable, Badge, Button } from '@/components/custom';
-import { useStoreGetById, useGetUsers, type UserData } from '@/utils/connection/queryOptions';
-import { ColumnDef } from '@tanstack/react-table';
-import { MdAdd } from 'react-icons/md';
+import { Header, Skeleton, Badge } from '@/components/custom';
+import { useStoreGetById } from '@/utils/connection/queryOptions';
+import Users from '@/components/user-service/Users';
+import Roles from '@/components/user-service/Roles';
 
 export const Route = createFileRoute('/_dashboard/stores/$storeid')({
    beforeLoad: ({ search }: { search: Record<string, unknown> }) => {
@@ -19,14 +19,12 @@ export const Route = createFileRoute('/_dashboard/stores/$storeid')({
 function StoreComponent() {
    const { storeid } = Route.useParams();
    const { data, isLoading, isSuccess } = useStoreGetById({ idKey: storeid });
-   const { data: usersData, isLoading: userLoading } = useGetUsers({ enabled: isSuccess, idKey: storeid });
 
    // const context = Route.useRouteContext()
    // console.log(context, "-------------->context")
+
    return (
       <div>
-         <Header title={data?.name} />
-
          <div className="grid grid-cols-[1fr_340px] gap-8">
             {isLoading ? (
                <>
@@ -35,17 +33,13 @@ function StoreComponent() {
                </>
             ) : (
                <>
-                  <DataTable
-                     data={usersData ?? []}
-                     isLoading={userLoading}
-                     columns={columns}
-                     hideAction={true}
-                     headAction={
-                        <Button size="sm" variant="outline" className="rounded-full">
-                           <MdAdd className="text-base" /> Нэмэх
-                        </Button>
-                     }
-                  />
+                  <div>
+                     <Header title="Хэрэглэгчид" />
+                     <Users isSuccess={isSuccess} storeid={storeid} />
+                     <Header title="Хэрэглэгчийн эрхүүд" />
+                     <Roles isSuccess={isSuccess} storeid={storeid} />
+                  </div>
+
                   <div className="wrapper p-5 h-fit">
                      <div className="flex gap-3.5 align-center mb-4">
                         <div className="text-muted-text">Нэр:</div>
@@ -76,25 +70,3 @@ function StoreComponent() {
       </div>
    );
 }
-
-const columns: ColumnDef<UserData>[] = [
-   {
-      header: 'Нэр',
-      accessorKey: 'firstName',
-      cell: ({ row }) => `${row.original.lastName?.slice(0, 1)}. ${row.original.firstName}`,
-   },
-   {
-      header: 'И-мэйл',
-      accessorKey: 'email',
-   },
-   {
-      header: 'Дугаар',
-      accessorKey: 'phoneNumber',
-      enableSorting: false,
-   },
-   {
-      header: 'Үүсгэсэн',
-      accessorKey: 'createdAt',
-      cell: ({ row }) => `${row.original.createdAt.slice?.(0, 10)}`,
-   },
-];

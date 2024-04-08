@@ -14,7 +14,7 @@ const BreadCrumb = ({ pathList }: TBreadCrumbProps) => {
    }
    
    return (
-      <Breadcrumb className="py-3" >
+      <Breadcrumb className="py-4" >
          <BreadcrumbList>
             <BreadcrumbItem>
                <Link to="/">

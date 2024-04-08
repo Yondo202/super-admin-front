@@ -1,6 +1,6 @@
 // import { ColumnDef } from "@tanstack/react-table";
 
-import "@tanstack/react-table"; //or vue, svelte, solid, qwik, etc.
+import '@tanstack/react-table'; //or vue, svelte, solid, qwik, etc.
 
 // declare module '@tanstack/react-table' {
 //   interface ColumnMeta<TData extends RowData, TValue> {
@@ -11,17 +11,29 @@ import "@tanstack/react-table"; //or vue, svelte, solid, qwik, etc.
 // // export {};
 
 declare global {
-  //   type ColumnTypes<T> = ColumnDef<T>
-  // type ColumnDef<T> = {
-  //   asAction?: boolean;
-  // } & ColumnDef<T>;
+   //   type ColumnTypes<T> = ColumnDef<T>
+   // type ColumnDef<T> = {
+   //   asAction?: boolean;
+   // } & ColumnDef<T>;
 
-  type TRowAction<T> = {
-    type: "add" | "edit" | "delete";
-    data: T;
-  };
+   //  type TRowAction<T> = {
+   //     type: 'add' | 'edit' | 'delete';
+   //     data: T;
+   //  };
+   interface ObjectConstructor {
+		groupBy<T>(
+			items: Iterable<T>,
+			callbackfn: (value: T, index: number) => string,
+		): Record<string, T[]>;
+	}
+
+	interface MapConstructor {
+		groupBy<T, U>(
+			items: Iterable<T>,
+			callbackfn: (value: T, index: number) => U,
+		): Map<U, T[]>;
+	}
 }
-
 //    // type TActionsFunc<T> = (type:TActionTypes, data:T) => void
 // }
 

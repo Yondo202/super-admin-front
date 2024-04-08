@@ -45,11 +45,12 @@
 
 @layer base {
    :root {
+      scroll-behavior: smooth;
       --radius: 0.5rem;
       --danger-color: 3.06 82.2% 62.55%;
    }
    html {
-      @apply font-sans;
+      @apply font-sans scroll-smooth;
    }
    * {
       @apply border-muted-border;
@@ -62,6 +63,10 @@
    }
    .wrapper {
       @apply rounded-lg border bg-card-bg border-muted-border;
+   }
+
+   .dialog-footer {
+      @apply sticky bottom-0 left-0 bg-card-bg py-4 flex justify-end w-full;
    }
 
    .bg-box-parent {

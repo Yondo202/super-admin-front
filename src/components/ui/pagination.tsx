@@ -10,7 +10,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
 Pagination.displayName = 'Pagination'
 
 const PaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<'ul'>>(({ className, ...props }, ref) => (
-   <ul ref={ref} className={cn('flex flex-row items-center gap-1', className)} {...props} />
+   <ul ref={ref} className={cn('flex flex-row items-center gap-2', className)} {...props} />
 ))
 PaginationContent.displayName = 'PaginationContent'
 
@@ -37,18 +37,19 @@ const PaginationLink = ({ className, isActive, size = 'sm', ...props }: Paginati
 )
 PaginationLink.displayName = 'PaginationLink'
 
+/*aspect-square*/
 const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-   <PaginationLink aria-label="Өмнөх" size="default" className={cn('gap-1 pl-2.5 font-normal', className)} {...props}>
-      <HiOutlineChevronLeft/>
-      <span>Өмнөх</span>
+   <PaginationLink aria-label="Өмнөх" size="sm" className={cn('gap-1 px-2.5 font-normal', className)} {...props}> 
+      <HiOutlineChevronLeft className="text-md"/>
+      <span >Өмнөх</span>
    </PaginationLink>
 )
 PaginationPrevious.displayName = 'PaginationPrevious'
 
 const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-   <PaginationLink aria-label="Дараах" size="default" className={cn('gap-1 pr-2.5 font-normal', className)} {...props}>
+   <PaginationLink aria-label="Дараах" size="sm" className={cn('gap-1 px-2.5 font-normal', className)} {...props}>
       <span>Дараах</span>
-      <HiOutlineChevronRight />
+      <HiOutlineChevronRight className="text-md"/>
    </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNext'

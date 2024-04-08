@@ -8,8 +8,9 @@ import { Toaster } from "sonner";
 import { DashboardSkeleton } from "@/components/ui";
 import { GoMoon, GoSun } from "react-icons/go";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import Notification from "./utils/hooks/Notification";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
@@ -18,6 +19,11 @@ const queryClient = new QueryClient({
       refetchOnReconnect:true,
     },
   },
+  // queryCache:new QueryCache({
+  //   onError: (error) => {
+  //     toast(`Something went wrong: ${error.message}`),
+  //   }
+  // }),
 });
 
 const router = createRouter({

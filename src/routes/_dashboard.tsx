@@ -23,7 +23,7 @@ function RootComponent() {
    return (
       <div className="grid grid-cols-[260px_1fr]">
          <LeftMenu />
-         <div className="pt-0 pl-10 pr-10 pb-10 h-dvh max-h-full overflow-y-auto">
+         <div className="pt-0 pl-10 pr-10 pb-12 h-dvh max-h-full overflow-y-auto">
             <BreadCrumb pathList={breadcrumbs??[]} />
             <Outlet />
          </div>

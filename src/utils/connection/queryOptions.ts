@@ -30,7 +30,7 @@ export const useStoreGetById = ({ idKey }: { idKey?: string }) => {
    });
 };
 
-export type UserData = {
+export type TUserData = {
    lastName: string;
    firstName: string;
    createdAt: string;
@@ -42,6 +42,23 @@ export const useGetUsers = ({ idKey, enabled }: { idKey?: string; enabled?: bool
    return useQuery({
       enabled: enabled,
       queryKey: [qKeys.users],
-      queryFn: () => request<UserData[]>({ url: `user?type=NORMAL`, webid: idKey }),
+      queryFn: () => request<TUserData[]>({ url: `user?type=NORMAL`, webid: idKey }),
    });
 };
+
+export type TPermission = {
+   name:string
+   nameMon:string
+   group:string
+   description:string
+   type:'NORMAL' | 'SUPER'
+}
+
+// {name: 'read-user', nameMon: 'List users', group: 'User', description: 'Self explaining', type: 'NORMAL'}
+export const usePermissions = () => {
+   return useQuery({
+      // enabled:!disabled,
+      queryKey: [qKeys.permission],
+      queryFn: () => request<TPermission[]>({ url: `permission?type=NORMAL` }),
+   })
+}

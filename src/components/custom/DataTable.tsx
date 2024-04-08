@@ -24,7 +24,7 @@ import { PiPath } from 'react-icons/pi';
 import { BiSearchAlt } from 'react-icons/bi';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import { TfiArrowsVertical } from 'react-icons/tfi';
-
+import { TAction } from '@/utils/enums';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // export type TRowAction<T> = {
@@ -36,9 +36,9 @@ interface DataTableProps<T> {
    columns: ColumnDef<T>[];
    data: T[];
    isLoading?: boolean;
-   rowAction?: (props: TRowAction<T>) => void;
+   rowAction?: (props: TAction<T>) => void;
    headAction?: React.ReactNode;
-   hideAction?:boolean
+   hideAction?: boolean;
 }
 const defaultPageSize = 10;
 const colSize = 180.666; // ene value auto oor avagdaj baigaa bolohoor .666 gej speacial oruulsan
@@ -54,8 +54,8 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
 
    // console.log(data.id)
 
-   const cols ={
-      withoutAction:columns,
+   const cols = {
+      withoutAction: columns,
       withAction: [
          // {
          //    id: 'select',
@@ -76,7 +76,7 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
             id: 'actions',
             size: 70,
             enableHiding: false,
-            cell: ({ row }:{ row:Row<T> }) => {
+            cell: ({ row }: { row: Row<T> }) => {
                // const rowdata = row.original
                return (
                   <div className="flex justify-center">
@@ -90,10 +90,10 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
                         <DropdownMenuContent align="end">
                            <DropdownMenuLabel className="text-muted-text">Үйлдэл</DropdownMenuLabel>
                            <DropdownMenuSeparator />
-                           <DropdownMenuItem className="gap-3" onClick={() => rowAction?.({ type: 'edit', data: row.original })}>
+                           <DropdownMenuItem className="gap-3" onClick={() => rowAction?.({ type: 'edit', data: row.original, isOpen: true })}>
                               <GoPencil /> Засах
                            </DropdownMenuItem>
-                           <DropdownMenuItem className="gap-3" onClick={() => rowAction?.({ type: 'delete', data: row.original })}>
+                           <DropdownMenuItem className="gap-3" onClick={() => rowAction?.({ type: 'delete', data: row.original, isOpen: true })}>
                               <GoTrash /> Устгах
                            </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -102,12 +102,12 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
                );
             },
          },
-      ]
-   }
+      ],
+   };
 
    const table = useReactTable({
       data,
-      columns: cols[hideAction?`withoutAction`:`withAction`],
+      columns: cols[hideAction ? `withoutAction` : `withAction`],
       onSortingChange: setSorting,
       onColumnFiltersChange: setColumnFilters,
       getCoreRowModel: getCoreRowModel(),
@@ -218,7 +218,7 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
                                  }}
                                  className={header.column.getCanSort() ? `hover:bg-hover-bg ${header.column.getIsSorted() ? `bg-hover-bg` : ``}` : ``}
                               >
-                                 <div className={`relative ${header.column.getCanSort()?`cursor-pointer`:``}`}>
+                                 <div className={`relative text-xs font-medium ${header.column.getCanSort() ? `cursor-pointer` : ``}`}>
                                     {/* {header.column.getCanSort() && !header.column.getIsSorted() && <TwoSideArrow />} */}
                                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                     <div className="absolute right-px top-2/4 -translate-y-2/4">
@@ -244,7 +244,7 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
                               return (
                                  <TableCell
                                     key={cell.id}
-                                    onClick={() => (cell.column.id !== 'actions' ? rowAction?.({ type: 'edit', data: row.original }) : null)}
+                                    onClick={() => (cell.column.id !== 'actions' ? rowAction?.({ type: 'edit', data: row.original, isOpen: true }) : null)}
                                     // style={size !== colSize ? { width: size, maxWidth: size } : {}}
                                     style={{ width: size, maxWidth: size }}
                                     className={`one_line ${cell.column.id === 'actions' ? `p-0` : ``} ${cell.column.getIsSorted() ? `bg-hover-bg` : ``}`}
