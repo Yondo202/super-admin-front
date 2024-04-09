@@ -1,5 +1,5 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
-// import { queryClient } from '@/App';
+import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 // import { LinkComponent } from '@tanstack/react-router';
@@ -13,7 +13,7 @@ export type TBreadCrumb = {
 };
 
 export const Route = createRootRouteWithContext<{
-   // queryClient: QueryClient;
+   queryClient: QueryClient;
    isAuthenticated: boolean;
    breadcrumbs?: TBreadCrumb[]; // yag type iin zow shaahguil bnlda
 }>()({
