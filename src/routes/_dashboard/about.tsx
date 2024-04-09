@@ -9,8 +9,6 @@ function AboutPage() {
    // const { control } = useForm({ mode: 'onChange', defaultValues: { checked: true } })
 
    return (
-      <div className='mt-10 p-4 wrapper'>
-         hehe
-      </div>
+      <div className='mt-10 p-4 wrapper'></div>
    )
 }

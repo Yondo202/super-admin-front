@@ -1,22 +1,11 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { request } from '@/utils/connection/request';
-import { qKeys, initalAction } from '@/utils/enums';
+import { initalAction } from '@/utils/enums';
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable, Badge, Button, Dialog } from '@/components/custom';
 import { MdAdd } from 'react-icons/md';
 import { TAction } from '@/utils/enums';
 import RoleAction from './RoleAction';
-import { type TPermission } from '@/utils/connection/queryOptions';
-
-export type TRolesData = {
-   id?: string;
-   name: string;
-   description: string;
-   type: 'NORMAL' | 'SUPER';
-   webid: string;
-   permissions: TPermission[];
-};
+import { type TRolesData, useGetRoles } from '@/utils/connection/queryOptions';
 
 type TRolesProps = {
    isSuccess: boolean;
@@ -25,7 +14,7 @@ type TRolesProps = {
 
 const Roles = ({ isSuccess, storeid }: TRolesProps) => {
    const [select, setSetSelect] = useState(initalAction<TRolesData>());
-   const { isLoading, data = [] } = useQuery({ enabled: isSuccess, queryKey: [qKeys.roles, 'index'], queryFn: () => request<TRolesData[]>({ url: `role?type=NORMAL`, webid: storeid }) });
+   const { isLoading, data = [] } = useGetRoles<TRolesData[]>({ storeid, enabled: isSuccess });
 
    const rowAction = (props: TAction<TRolesData>) => {
       setSetSelect(props);
@@ -38,7 +27,7 @@ const Roles = ({ isSuccess, storeid }: TRolesProps) => {
    return (
       <>
          <DataTable
-            data={data ?? []}
+            data={data?.filter(item=>!item.isGenerated) ?? []}
             isLoading={isLoading}
             columns={columns}
             rowAction={rowAction}

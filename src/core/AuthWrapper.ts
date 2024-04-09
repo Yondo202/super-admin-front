@@ -88,8 +88,6 @@ export const useAuthCore = () => {
    //    // },
    // })
 
-   // console.log(data, "--->")
-
    async function currentSession() {
       try {
          const { accessToken } = (await fetchAuthSession()).tokens ?? {}

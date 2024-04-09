@@ -52,8 +52,6 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
    const [rowSelection, setRowSelection] = React.useState({});
 
-   // console.log(data.id)
-
    const cols = {
       withoutAction: columns,
       withAction: [

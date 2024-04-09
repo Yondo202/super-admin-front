@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import Label from '@/components/ui/Label';
 import { ValidationRule } from 'react-hook-form';
-import { Textarea } from './textarea';
 
 const InputVariants = cva(
    `flex w-full rounded-md border py-1.5 bg-card-bg hover:bg-hover-bg focus:hover:bg-card-bg text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-text/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus:border-primary disabled:cursor-not-allowed disabled:opacity-50`,

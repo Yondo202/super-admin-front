@@ -2,6 +2,7 @@ export const qKeys = Object.freeze({
    stores: 'webs',
    users: 'users',
    roles: 'roles',
+   invite: 'invite',
    permission: 'permission',
 });
 

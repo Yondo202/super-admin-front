@@ -7,8 +7,10 @@ export { Skeleton } from '../ui/skeleton'
 export { Badge } from '../ui/badge'
 export { default as Button } from '../ui/button'
 export { default as BreadCrumb } from './BreadCrumb'
+export { default as MultipleSelector } from "./MultiSelect"
 
 
+export { default as Loading } from "@/components/ui/Loading"
 export { Textarea } from "@/components/ui/textarea"
 export { Checkbox } from "@/components/ui/checkbox"
 // export { default as CheckBox } from './CheckBox'

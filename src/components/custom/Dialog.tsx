@@ -1,26 +1,27 @@
-import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { DialogContent, DialogHeader, DialogTitle, Dialog } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
 
 type TDialogProps = {
    children: React.ReactNode;
    title?: string;
    isOpen: boolean;
    onOpenChange: (open: boolean) => void;
+   className?: string;
 };
 
-const Dialog = ({ children, title, isOpen, onOpenChange }: TDialogProps) => {
+const DialogComponent = ({ children, title, isOpen, onOpenChange, className }: TDialogProps) => {
    return (
-      <DialogPrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
+      <Dialog onOpenChange={onOpenChange} open={isOpen}>
          {/* <DialogTrigger>Open</DialogTrigger> */}
          <DialogContent>
             <DialogHeader>
                <DialogTitle>{title}</DialogTitle>
                {/* <DialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</DialogDescription> */}
             </DialogHeader>
-            <div className='max-h-[80dvh] overflow-y-auto p-6 pb-0 relative'>{children}</div>
+            <div className={cn('w-[600px] max-h-[80dvh] overflow-y-auto p-6 pb-0 relative', className)}>{children}</div>
          </DialogContent>
-      </DialogPrimitive.Root>
+      </Dialog>
    );
 };
 
-export default Dialog;
+export default DialogComponent;

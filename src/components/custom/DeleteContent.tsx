@@ -18,7 +18,7 @@ type TDeleteContent = {
 
 const DeleteContent = ({ className, isLoading, setClose, submitAction }: TDeleteContent) => {
    return (
-      <div className={cn('flex gap-12 pb-8 px-5', className)}>
+      <div className={cn('flex gap-8 mb-6 px-5', className)}>
          <Delete />
          <div className="flex flex-col justify-between">
             <div className="font-normal text-lg">Мэдээллийг устгахдаа итгэлтэй байна уу?</div>

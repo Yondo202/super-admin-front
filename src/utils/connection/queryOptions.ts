@@ -7,6 +7,12 @@ export type TPlan = {
    type: string;
 };
 
+type TQueryProps = {
+   storeid:string
+   enabled?:boolean
+   keyId?: string | number
+}
+
 export type TStore = {
    name: string;
    description: string;
@@ -30,19 +36,43 @@ export const useStoreGetById = ({ idKey }: { idKey?: string }) => {
    });
 };
 
+export type TRolesData = {
+   id: string;
+   name: string;
+   description: string;
+   type: 'NORMAL' | 'SUPER';
+   webid: string;
+   permissions: TPermission[];
+   isGenerated:boolean
+};
+
+type TRolesOption = {
+   value:string
+   label:string
+
+
+   disable?: boolean;
+   fixed?: boolean;
+   [key: string]: string | boolean | undefined; // select option ii butets
+} 
+
+
 export type TUserData = {
+   id?: string;
    lastName: string;
    firstName: string;
    createdAt: string;
    email: string;
    phoneNumber: string;
+   roles:TRolesData[],
+   roleIds: TRolesOption[]
 };
 
-export const useGetUsers = ({ idKey, enabled }: { idKey?: string; enabled?: boolean }) => {
+export const useGetUsers = <TRequest>({ storeid, enabled, keyId }: TQueryProps) => {
    return useQuery({
       enabled: enabled,
-      queryKey: [qKeys.users],
-      queryFn: () => request<TUserData[]>({ url: `user?type=NORMAL`, webid: idKey }),
+      queryKey: [qKeys.users, keyId??`index`],
+      queryFn: () => request<TRequest>({ url: `user${keyId?`/${keyId}`:``}?type=NORMAL`, webid: storeid }),
    });
 };
 
@@ -62,3 +92,13 @@ export const usePermissions = () => {
       queryFn: () => request<TPermission[]>({ url: `permission?type=NORMAL` }),
    })
 }
+
+
+
+
+
+export const useGetRoles = <TRequest>({ storeid, enabled, keyId }: TQueryProps) => {
+   return useQuery({ enabled: enabled, queryKey: [qKeys.roles, keyId??'index'], queryFn: () => request<TRequest>({ url: `role${keyId?`/${keyId}`:``}?type=NORMAL`, webid: storeid }) });
+};
+
+

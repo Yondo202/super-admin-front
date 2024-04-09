@@ -1,12 +1,11 @@
 import { TAction } from '@/utils/enums';
-import { TRolesData } from './Roles';
 import { useForm } from 'react-hook-form';
 import { TextInput, Skeleton, Checkbox, Button, DeleteContent } from '@/components/custom'; //Textarea - daraa ni nem
 import { useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { request, UseReFetch } from '@/utils/connection/request';
 import { qKeys } from '@/utils/enums';
-import { usePermissions } from '@/utils/connection/queryOptions';
+import { usePermissions, type TRolesData, useGetRoles } from '@/utils/connection/queryOptions';
 
 type TRoleAction = {
    select: TAction<TRolesData>;
@@ -17,11 +16,7 @@ type TRoleAction = {
 const RoleAction = ({ select, storeid, setClose }: TRoleAction) => {
    const { control, handleSubmit, reset, setValue, watch } = useForm<TRolesData>({ mode: 'onChange', defaultValues: { name: '', description: '', permissions: [] } });
 
-   const { data, isLoading, isSuccess, dataUpdatedAt } = useQuery({
-      enabled: !!select.data?.id,
-      queryKey: [qKeys.roles, select.data?.id],
-      queryFn: () => request<TRolesData>({ url: `role/${select.data?.id}?type=NORMAL` }),
-   });
+   const { isLoading, data, isSuccess, dataUpdatedAt } = useGetRoles<TRolesData>({ storeid, enabled: !!select.data?.id, keyId:select.data?.id });
 
    const { mutate, isPending } = useMutation({
       mutationFn: (body: Omit<TRolesData, 'permissions' | 'isDelete'> & { permissions: string[] } & { isDelete?: boolean }) =>
@@ -89,7 +84,7 @@ const RoleAction = ({ select, storeid, setClose }: TRoleAction) => {
                {Object.keys(group)?.map((element, index) => {
                   return (
                      <div key={index}>
-                        <div className="pb-1 pt-3.5 text-muted-text font-mono">{element}</div>
+                        <div className="pb-1 pt-3.5 text-muted-text">{element}</div>
                         {group?.[element]?.map((item, ind) => {
                            return (
                               <div key={ind} className="flex items-center gap-3 py-1 pl-2 h-max">
@@ -105,7 +100,7 @@ const RoleAction = ({ select, storeid, setClose }: TRoleAction) => {
                                        );
                                     }}
                                  />
-                                 <label htmlFor={item.name} className="cursor-pointer">
+                                 <label htmlFor={item.name} className="cursor-pointer select-none">
                                     {item.nameMon}
                                  </label>
                               </div>

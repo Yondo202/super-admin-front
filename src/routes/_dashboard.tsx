@@ -1,7 +1,6 @@
 import { Outlet, createFileRoute, redirect, useChildMatches, useRouterState } from '@tanstack/react-router';
 import LeftMenu from '@/components/layout/LeftMenu';
-import { BreadCrumb } from '@/components/custom'; 
-
+import { BreadCrumb } from '@/components/custom';
 
 export const Route = createFileRoute('/_dashboard')({
    beforeLoad: ({ context }) => {
@@ -21,11 +20,13 @@ function RootComponent() {
       ?.context.breadcrumbs;
 
    return (
-      <div className="grid grid-cols-[260px_1fr]">
+      <div className="grid grid-cols-[240px_1fr]">
          <LeftMenu />
-         <div className="pt-0 pl-10 pr-10 pb-12 h-dvh max-h-full overflow-y-auto">
-            <BreadCrumb pathList={breadcrumbs??[]} />
-            <Outlet />
+         <div className="flex flex-col pt-0 pl-10 pr-10 pb-12 h-dvh max-h-full overflow-y-auto">
+            <div className="w-full max-w-screen-2xl self-center">
+               <BreadCrumb pathList={breadcrumbs ?? []} />
+               <Outlet />
+            </div>
          </div>
       </div>
    );
