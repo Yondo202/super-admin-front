@@ -93,10 +93,6 @@ export const usePermissions = () => {
    })
 }
 
-
-
-
-
 export const useGetRoles = <TRequest>({ storeid, enabled, keyId }: TQueryProps) => {
    return useQuery({ enabled: enabled, queryKey: [qKeys.roles, keyId??'index'], queryFn: () => request<TRequest>({ url: `role${keyId?`/${keyId}`:``}?type=NORMAL`, webid: storeid }) });
 };

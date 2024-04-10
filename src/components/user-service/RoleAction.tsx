@@ -1,4 +1,3 @@
-import { TAction } from '@/utils/enums';
 import { useForm } from 'react-hook-form';
 import { TextInput, Skeleton, Checkbox, Button, DeleteContent } from '@/components/custom'; //Textarea - daraa ni nem
 import { useEffect } from 'react';
@@ -7,13 +6,9 @@ import { request, UseReFetch } from '@/utils/connection/request';
 import { qKeys } from '@/utils/enums';
 import { usePermissions, type TRolesData, useGetRoles } from '@/utils/connection/queryOptions';
 
-type TRoleAction = {
-   select: TAction<TRolesData>;
-   setClose: ({ isDelete }: { isDelete?: boolean }) => void;
-   storeid: string;
-};
+import { type TActionProps } from '@/utils/connection/sharedTypes';
 
-const RoleAction = ({ select, storeid, setClose }: TRoleAction) => {
+const RoleAction = ({ select, storeid, setClose }: TActionProps<TRolesData>) => {
    const { control, handleSubmit, reset, setValue, watch } = useForm<TRolesData>({ mode: 'onChange', defaultValues: { name: '', description: '', permissions: [] } });
 
    const { isLoading, data, isSuccess, dataUpdatedAt } = useGetRoles<TRolesData>({ storeid, enabled: !!select.data?.id, keyId:select.data?.id });

@@ -1,16 +1,16 @@
-import { Controller, type Control, type RegisterOptions, type FieldValues, type FieldPath, type FieldName } from 'react-hook-form'
+import { Controller, type Control, type RegisterOptions, type FieldValues, type FieldPath } from 'react-hook-form'
 import { ErrorMessage, FloatingLabelInput } from '@/components/ui'
 import { FloatingLabelInputProps } from '../ui/Input' // InputProps, TInputPropsAddition,
 
 // type TController = UseControllerProps
 
-export type UseControllerProps<TFieldValues extends FieldValues = FieldValues> = {
-   name: FieldName<TFieldValues>
-   rules?: Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
-   onFocus?: () => void
-   defaultValue?: unknown
-   control?: Control<TFieldValues>
-}
+// export type UseControllerProps<TFieldValues extends FieldValues = FieldValues> = {
+//    name: FieldName<TFieldValues>
+//    rules?: Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
+//    onFocus?: () => void
+//    defaultValue?: unknown
+//    control?: Control<TFieldValues>
+// }
 
 type TInputWithControl<TFieldValues extends FieldValues = FieldValues> = {
    control: Control<TFieldValues>

@@ -44,19 +44,22 @@ export const request = async <T>({ mainUrl, url = '', method = 'get', body = und
       }
 
       return response.data.data;
-   } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   } catch (err: any) {
+      if (err?.response?.data?.message) {
+         Notification(err?.response?.data?.message, 'error');
+         throw err;
+      }
       Notification('Хүсэлт амжилтгүй', 'error');
-      throw err;
    }
 };
 
-
 type TRefetch = {
-   queryKey:string
-   queryId?:string
-}
+   queryKey: string;
+   queryId?: string;
+};
 
-export const UseReFetch = ({ queryKey, queryId }:TRefetch) => {
+export const UseReFetch = ({ queryKey, queryId }: TRefetch) => {
    queryClient.refetchQueries({ queryKey: [queryKey, queryId ?? undefined] });
    // messageAlert('Хүсэлт амжилттай')
 };

@@ -58,6 +58,7 @@ export const useAuthCore = () => {
          await signOut()
          setInitial()
       } catch (error) {
+         setInitial()
          Notification('Хүсэлт амжилтгүй', 'error')
       }
    }
@@ -66,11 +67,11 @@ export const useAuthCore = () => {
    const fetchMe = async (jwt: JWT | undefined) => {
       try {
          const userme = await axios.get(import.meta.env.VITE_AUTH_URL + 'user/me', { headers: { Authorization: `Bearer ${jwt}` } })
-         // if (userme.data?.data.type !== 'SUPER') {
-         //    // await signOut()
-         //    Notification('Нэвтрэх боломжгүй хэрэглэгч байна!', 'error')
-         //    return userme.data?.data
-         // }
+         if (userme.data?.data.type !== 'SUPER') {
+            handleSignOut()
+            Notification('Нэвтрэх боломжгүй хэрэглэгч байна!', 'error')
+            return userme.data?.data
+         }
 
          if (userme?.data?.data) {
             setAuthState({ isAuthenticated: true, isLoading: false, user: userme?.data?.data })

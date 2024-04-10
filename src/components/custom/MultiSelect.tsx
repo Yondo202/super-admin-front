@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import { IoIosClose } from 'react-icons/io';
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
@@ -22,7 +20,7 @@ interface GroupOption {
    [key: string]: Option[];
 }
 
-interface MultipleSelectorProps {
+export interface MultipleSelectorProps {
    value?: Option[];
    defaultOptions?: Option[];
    /** manually controlled options */
@@ -266,7 +264,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   setSelected(newOptions);
                   onChange?.(newOptions);
                }}
-            >{`Create "${inputValue}"`}</CommandItem>
+            >{`Шинээр нэмэх "${inputValue}"`}</CommandItem>
          );
 
          // For normal creatable
@@ -348,11 +346,11 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                            {option.label}
                            <button
                               className={cn('ml-1 rounded-full outline-none ring-offset-background focus:ring-1 focus:ring-ring focus:ring-offset-1', (disabled || option.fixed) && 'hidden')}
-                              onKeyDown={(e) => {
-                                 if (e.key === 'Enter') {
-                                    handleUnselect(option);
-                                 }
-                              }}
+                              // onKeyDown={(e) => {
+                              //    if (e.key === 'Enter') {
+                              //       handleUnselect(option);
+                              //    }
+                              // }}
                               onMouseDown={(e) => {
                                  e.preventDefault();
                                  e.stopPropagation();
@@ -396,42 +394,43 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                      ) : (
                         <>
                            {EmptyItem()}
-                           
                            {CreatableItem()}
                            {!selectFirstItem && <CommandItem value="-" className="hidden" />}
-                           {Object.entries(selectables).map(([key, dropdowns]) => (
-                              <CommandGroup key={key} heading={key} className="h-full overflow-auto">
-                                 <>
-                                    {dropdowns.map((option) => {
-                                       return (
-                                          // <div className={cn('cursor-pointer hover:bg-red-600', option.disable && 'cursor-default text-muted-text')}>{option.label}</div>
-                                          <CommandItem
-                                             key={option.value}
-                                             value={option.value}
-                                             disabled={option.disable}
-                                             onMouseDown={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                             }}
-                                             onSelect={() => {
-                                                if (selected.length >= maxSelected) {
-                                                   onMaxSelected?.(selected.length);
-                                                   return;
-                                                }
-                                                setInputValue('');
-                                                const newOptions = [...selected, option];
-                                                setSelected(newOptions);
-                                                onChange?.(newOptions);
-                                             }}
-                                             className={cn('cursor-pointer', option.disable && 'cursor-default text-muted-text')}
-                                          >
-                                             {option.label}
-                                          </CommandItem>
-                                       );
-                                    })}
-                                 </>
-                              </CommandGroup>
-                           ))}
+                           {Object.entries(selectables).map(([key, dropdowns]) => {
+                              return (
+                                 <CommandGroup key={key} heading={key} className="h-full overflow-auto">
+                                    <CommandList>
+                                       {dropdowns.map((option) => {
+                                          return (
+                                             // <div className={cn('cursor-pointer hover:bg-red-600', option.disable && 'cursor-default text-muted-text')}>{option.label}</div>
+                                             <CommandItem
+                                                key={option.value}
+                                                value={option.label}
+                                                disabled={option.disable}
+                                                onMouseDown={(e) => {
+                                                   e.preventDefault();
+                                                   e.stopPropagation();
+                                                }}
+                                                onSelect={() => {
+                                                   if (selected.length >= maxSelected) {
+                                                      onMaxSelected?.(selected.length);
+                                                      return;
+                                                   }
+                                                   setInputValue('');
+                                                   const newOptions = [...selected, option];
+                                                   setSelected(newOptions);
+                                                   onChange?.(newOptions);
+                                                }}
+                                                className={cn('cursor-pointer', option.disable && 'cursor-default text-muted-text')}
+                                             >
+                                                {option.label}
+                                             </CommandItem>
+                                          );
+                                       })}
+                                    </CommandList>
+                                 </CommandGroup>
+                              );
+                           })}
                         </>
                      )}
                   </CommandList>

@@ -16,7 +16,7 @@ export const buttonVariants = cva(
         default:
           "bg-primary text-[#FFF] hover:bg-primary/80",
         destructive:
-          "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
+          "bg-hover-bg/20 border border-danger-color/30 text-danger-color hover:bg-hover-bg",
         outline:
           "border border-border bg-card-bg text-primary hover:bg-slate-100 hover:bg-hover-bg",
         secondary:

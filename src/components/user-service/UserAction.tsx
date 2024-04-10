@@ -1,28 +1,27 @@
-import { TAction } from '@/utils/enums';
+import { type TActionProps } from '@/utils/connection/sharedTypes';
 // import { TUserData } from './Roles';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { TextInput, Button, MultipleSelector, DeleteContent, Checkbox, Loading } from '@/components/custom'; //Textarea - daraa ni nem
-import { MultipleSelectorRef } from '@/components/custom/MultiSelect';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { request, UseReFetch } from '@/utils/connection/request';
-import { Empty } from '@/assets/svg'; 
+import { Empty } from '@/assets/svg';
 import { qKeys } from '@/utils/enums';
 import Notification from '@/utils/hooks/Notification';
 import { type TUserData, useGetRoles, type TRolesData } from '@/utils/connection/queryOptions';
 import Label from '@/components/ui/Label';
 import { VscSend } from 'react-icons/vsc';
 
-type TUserAction = {
-   // daraa type uudiig neg bolgo
-   select: TAction<TUserData>;
-   setClose: ({ isDelete }: { isDelete?: boolean }) => void;
-   storeid: string;
+type TRequestOver = {
+   roleIds?: string[];
+   isDelete?: boolean;
+   action?: 'ADD' | 'REMOVE';
+   roleId?: string;
 };
 
-const UserAction = ({ select, storeid, setClose }: TUserAction) => {
-   const selectRef = useRef<MultipleSelectorRef>(null);
-   const { control, handleSubmit, reset, watch, setValue } = useForm<TUserData>({
+const UserAction = ({ select, storeid, setClose }: TActionProps<TUserData>) => {
+   // const selectRef = useRef<MultipleSelectorRef>(null);
+   const { control, handleSubmit, reset, watch } = useForm<TUserData>({
       mode: 'onChange',
       defaultValues: { phoneNumber: '', roleIds: [] },
    });
@@ -30,9 +29,7 @@ const UserAction = ({ select, storeid, setClose }: TUserAction) => {
    const { data: rolesData } = useGetRoles<TRolesData[]>({ storeid });
 
    const { mutate, isPending } = useMutation({
-      mutationFn: (
-         body: Omit<TUserData, 'action' | 'roleId' | 'roleIds' | 'isDelete'> & { roleIds?: string[] } & { isDelete?: boolean } & { action?: 'ADD' | 'REMOVE' } & { roleId?: string },
-      ) =>
+      mutationFn: (body: Omit<TUserData, 'action' | 'roleId' | 'roleIds' | 'isDelete'> & TRequestOver) =>
          request({
             url: select.type === 'add' ? `user/invite` : `user/${select.data?.id}`,
             body: body,
@@ -60,7 +57,7 @@ const UserAction = ({ select, storeid, setClose }: TUserAction) => {
    const onSubmit = (data: TUserData) => {
       if (data.roleIds.length === 0) {
          Notification('Хэрэглэгчийн эрхийг сонгоно уу', 'error');
-         selectRef?.current?.input.focus();
+         // selectRef?.current?.input.focus();
          return;
       }
       mutate({ ...data, roleIds: data.roleIds?.map((item) => item.value) });
@@ -86,20 +83,39 @@ const UserAction = ({ select, storeid, setClose }: TUserAction) => {
          {select.type === 'add' ? (
             <div>
                <Label>Хэрэглэгчийн эрхүүд</Label>
-               <MultipleSelector
-                  value={watch()?.roleIds}
-                  ref={selectRef}
-                  onChange={(event) => setValue('roleIds', event)}
-                  emptyIndicator={
-                     <div className="flex h-24 w-full flex-col items-center justify-center gap-5">
-                        <Empty className="dark:opacity-30" />
-                        <div className="text-muted-text opacity-70">Мэдээлэл байхгүй байна</div>
-                     </div>
-                  }
-                  // className="mb-6"
-                  options={rolesData?.filter((item) => !item.isGenerated).map((item) => ({ label: item.name, value: item.id })) ?? []}
-                  placeholder="Эрхүүд"
+               <Controller
+                  control={control}
+                  name="roleIds"
+                  rules={{ required: 'Эрх сонгоно уу' }}
+                  render={({ field, fieldState }) => {
+                     return (
+                        <>
+                           <MultipleSelector
+                              value={field.value}
+                              // ref={selectRef}
+                              className={fieldState.error ? 'border-danger-color' : ''}
+                              onChange={(event) => {
+                                 field.onChange(event);
+                              }}
+                              hidePlaceholderWhenSelected={true}
+                              emptyIndicator={
+                                 <div className="flex h-24 w-full flex-col items-center justify-center gap-5">
+                                    <Empty className="dark:opacity-30" />
+                                    <div className="text-muted-text opacity-70">Мэдээлэл байхгүй байна</div>
+                                 </div>
+                              }
+                              // className="mb-6"
+                              options={rolesData?.filter((item) => !item.isGenerated).map((item) => ({ label: item.name, value: item.id })) ?? []}
+                              placeholder="Эрхүүд"
+                           />
+                           {fieldState.error && <div className="text-danger-color text-end">{fieldState.error.message}</div>}
+                           {/* selectRef?.current?.input.focus(); */}
+                        </>
+                     );
+                  }}
                />
+
+               {/* <FancyMultiSelect /> */}
             </div>
          ) : (
             <div className="mb-8">
@@ -124,7 +140,7 @@ const UserAction = ({ select, storeid, setClose }: TUserAction) => {
                                  mutate({ ...watch(), roleIds: watch().roleIds?.map((item) => item.value), action: event ? 'ADD' : 'REMOVE', roleId: item.id });
                               }}
                            />
-                           <label htmlFor={item.id} className="cursor-pointer select-none">
+                           <label htmlFor={item.id} className="cursor-pointer select-none hover:text-primary">
                               {item.name}
                            </label>
                         </div>

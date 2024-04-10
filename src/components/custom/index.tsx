@@ -7,6 +7,7 @@ export { Skeleton } from '../ui/skeleton'
 export { Badge } from '../ui/badge'
 export { default as Button } from '../ui/button'
 export { default as BreadCrumb } from './BreadCrumb'
+// export { default as MultipleSelector } from "../ui/MultiSelect"
 export { default as MultipleSelector } from "./MultiSelect"
 
 
