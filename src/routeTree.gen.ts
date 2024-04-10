@@ -14,8 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as DashboardIndexImport } from './routes/_dashboard/index'
-import { Route as DashboardAboutImport } from './routes/_dashboard/about'
 import { Route as DashboardStoresIndexImport } from './routes/_dashboard/stores.index'
+import { Route as DashboardNotificationIndexImport } from './routes/_dashboard/notification.index'
 import { Route as DashboardStoresStoreidImport } from './routes/_dashboard/stores.$storeid'
 
 // Create/Update Routes
@@ -35,15 +35,17 @@ const DashboardIndexRoute = DashboardIndexImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardAboutRoute = DashboardAboutImport.update({
-  path: '/about',
-  getParentRoute: () => DashboardRoute,
-} as any)
-
 const DashboardStoresIndexRoute = DashboardStoresIndexImport.update({
   path: '/stores/',
   getParentRoute: () => DashboardRoute,
 } as any)
+
+const DashboardNotificationIndexRoute = DashboardNotificationIndexImport.update(
+  {
+    path: '/notification/',
+    getParentRoute: () => DashboardRoute,
+  } as any,
+)
 
 const DashboardStoresStoreidRoute = DashboardStoresStoreidImport.update({
   path: '/stores/$storeid',
@@ -62,16 +64,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/_dashboard/about': {
-      preLoaderRoute: typeof DashboardAboutImport
-      parentRoute: typeof DashboardImport
-    }
     '/_dashboard/': {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
     '/_dashboard/stores/$storeid': {
       preLoaderRoute: typeof DashboardStoresStoreidImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/notification/': {
+      preLoaderRoute: typeof DashboardNotificationIndexImport
       parentRoute: typeof DashboardImport
     }
     '/_dashboard/stores/': {
@@ -85,9 +87,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   DashboardRoute.addChildren([
-    DashboardAboutRoute,
     DashboardIndexRoute,
     DashboardStoresStoreidRoute,
+    DashboardNotificationIndexRoute,
     DashboardStoresIndexRoute,
   ]),
   LoginRoute,

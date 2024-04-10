@@ -4,6 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { storeQueryOptions, TStore } from '@/utils/connection/queryOptions';
 import { TAction } from '@/utils/enums';
+
 export const Route = createFileRoute('/_dashboard/stores/')({
    loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(storeQueryOptions),
    beforeLoad: () => ({ breadcrumbs: [{ title: 'Вэбийн жагсаалт', toLink: '/stores' }] }),

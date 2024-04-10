@@ -10,8 +10,9 @@ export { default as BreadCrumb } from './BreadCrumb'
 // export { default as MultipleSelector } from "../ui/MultiSelect"
 export { default as MultipleSelector } from "./MultiSelect"
 
-
 export { default as Loading } from "@/components/ui/Loading"
 export { Textarea } from "@/components/ui/textarea"
 export { Checkbox } from "@/components/ui/checkbox"
+
+export { Tabs, TabsList, TabsTrigger, TabsContent  } from "@/components/ui/tabs"
 // export { default as CheckBox } from './CheckBox'
