@@ -168,7 +168,7 @@ const columnDef: ColumnDef<TEmailCredential>[] = [
    {
       header: 'Үндсэн',
       accessorKey: 'is_default',
-      cell: ({ row }) => <Checkbox checked={row.original.is_default} />,
+      cell: ({ row }) => <Checkbox checked={row.original.is_default.toString() === "true"} />,
       enableSorting: false,
    },
    {

@@ -3,7 +3,7 @@ import { DataTable, Header } from '@/components/custom';
 import { ColumnDef } from '@tanstack/react-table';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { storeQueryOptions, TStore } from '@/utils/connection/queryOptions';
-import { TAction } from '@/utils/enums';
+import { TAction } from '@/utils/connection/sharedTypes';
 
 export const Route = createFileRoute('/_dashboard/stores/')({
    loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(storeQueryOptions),
