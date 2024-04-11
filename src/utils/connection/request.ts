@@ -4,7 +4,7 @@ import Notification from '@/utils/hooks/Notification';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { queryClient } from '@/App';
 
-type TRequest<T> = {
+export type TRequest<T> = {
    method?: 'get' | 'post' | 'put' | 'delete';
    url?: string;
    mainUrl?: string;

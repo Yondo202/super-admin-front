@@ -3,7 +3,7 @@ import { initalAction } from '@/utils/enums';
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable, Badge, Button, Dialog } from '@/components/custom';
 import { MdAdd } from 'react-icons/md';
-import { TAction } from '@/utils/enums';
+import { TAction } from '@/utils/connection/sharedTypes';
 import RoleAction from './RoleAction';
 import { type TRolesData, useGetRoles } from '@/utils/connection/queryOptions';
 

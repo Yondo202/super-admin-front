@@ -11,7 +11,7 @@ const ErrorMessage = ({ error }: { error: ControllerFieldState['error'] }) => {
    if (!error) return
    return (
       <div className="relative z-10 text-danger-color">
-         <div className="absolute right-0 top-1.5 text-xs leading-3">{error?.message}</div>
+         <div className="absolute right-0 top-0.5 text-xs leading-3">{error?.message}</div>
       </div>
    )
 }

@@ -14,7 +14,7 @@ const InputVariants = cva(
          },
          sizes: {
             default: 'h-9 px-3.5',
-            sm: 'h-8 px-3 text-xs',
+            sm: 'h-7 px-3 text-xs',
             lg: 'h-11 px-4 text-base',
          },
       },
@@ -50,7 +50,7 @@ const FloatingLabel = React.forwardRef<React.ElementRef<typeof Label>, React.Com
       <Label
          className={cn(
             //peer-focus:secondary peer-focus:dark:secondary / sain oilgosongui
-            'absolute start-2 top-1 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md bg-card-bg px-2 text-sm text-gray-400 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-placeholder-shown:bg-transparent peer-focus:-top-[4px] peer-focus:text-gray-600 peer-focus:dark:text-gray-400 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:bg-card-bg peer-focus:px-2.5 peer-focus:py-[4px] rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4',
+            'absolute start-2 top-1 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md bg-card-bg px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-placeholder-shown:bg-transparent peer-focus:-top-[4px] peer-focus:text-gray-600 peer-focus:dark:text-gray-400 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:bg-card-bg peer-focus:px-2.5 peer-focus:py-[4px] rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4',
             className,
          )}
          ref={ref}
@@ -82,7 +82,7 @@ const FloatingLabelInput = React.forwardRef<React.ElementRef<typeof FloatingInpu
 
             <FloatingInput ref={ref} id={id ?? ids} {...props} className={`${props.className} ${beforeAddon ? `pl-9` : ``}`} />
 
-            <div className="absolute left-2 top-1/2 w-4 -translate-y-1/2 text-muted-text peer-focus:text-primary text-lg">{beforeAddon}</div>
+            <div className={cn('absolute left-2 top-1/2 w-4 -translate-y-1/2 text-muted-text peer-focus:text-primary text-lg', props.sizes === 'sm' ? 'text-base' : `text-lg`)}>{beforeAddon}</div>
 
             {floatLabel && (
                <FloatingLabel htmlFor={id ?? ids} className={`${props.sizes === 'sm' ? `text-xs` : ``} ${beforeAddon ? `peer-placeholder-shown:pl-8` : ``}`}>

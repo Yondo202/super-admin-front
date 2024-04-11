@@ -6,5 +6,6 @@ interface ImportMetaEnv {
     readonly VITE_AUTH_COOKIE_STORAGE_DOMAIN: string
     readonly VITE_AUTH_URL: string
     readonly VITE_CONFIG_URL: string
+    readonly VITE_URL_NOTIFICATION: string
     // readonly VITE_PLAN_URL: string
 }

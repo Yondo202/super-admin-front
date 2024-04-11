@@ -24,7 +24,7 @@ import { PiPath } from 'react-icons/pi';
 import { BiSearchAlt } from 'react-icons/bi';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import { TfiArrowsVertical } from 'react-icons/tfi';
-import { TAction } from '@/utils/enums';
+import { TAction } from '@/utils/connection/sharedTypes';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // export type TRowAction<T> = {
@@ -138,7 +138,7 @@ export default function DataTable<T extends object>({ columns, data = [], isLoad
    return (
       <div className="w-full">
          <div className="wrapper overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-5">
+            <div className="flex items-center justify-between px-4 py-6">
                <FloatingLabelInput
                   // label="Нэрээр хайх..."
                   // value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}

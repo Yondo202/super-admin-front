@@ -3,7 +3,7 @@ import { useGetUsers, type TUserData } from '@/utils/connection/queryOptions';
 import { ColumnDef } from '@tanstack/react-table';
 // import { MdAdd } from 'react-icons/md';
 import { useState } from 'react';
-import { TAction } from '@/utils/enums';
+import { TAction } from '@/utils/connection/sharedTypes'; 
 import { initalAction } from '@/utils/enums';
 import UserAction from './UserAction';
 import { VscSend } from "react-icons/vsc";
@@ -25,6 +25,7 @@ const Users = ({ isSuccess, storeid }: TUserProps) => {
    const setClose = ({ isDelete }: { isDelete?: boolean }) => {
       setSetSelect({ isOpen: false, type: isDelete ? 'delete' : 'add' });
    };
+
    return (
       <>
          <DataTable

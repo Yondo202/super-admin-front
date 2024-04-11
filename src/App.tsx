@@ -42,7 +42,7 @@ declare module "@tanstack/react-router" {
 }
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuthState();
+  const { isAuthenticated, isLoading } = useAuthState()
 
   return (
     <QueryClientProvider client={queryClient}>
