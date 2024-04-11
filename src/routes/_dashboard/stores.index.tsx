@@ -45,4 +45,12 @@ const columns: ColumnDef<TStore>[] = [
       size: 400,
       // ellipsis:true
    },
+   {
+      header: 'Үүсгэсэн',
+      accessorKey: "createdAt",
+      enableSorting: false,
+      cell:({ row })=> row.original.createdAt?.replace('T', " / ")?.slice(0, 18)
+      // size: 400,
+      // ellipsis:true
+   },
 ];
